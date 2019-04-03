@@ -20,7 +20,7 @@ export class CrudService{
     console.log(this.myData);
     this.appointmentsRef.push({
       name: 'AppointEx Test', //this.myData.displayName,
-      idNumber: '816008234',
+      idNumber: '816008234', //this.myData.idNumber
       email: this.myData.email,
       mobileNumber: '123-4567', //this.myData.phoneNumber,
       lecturer: appointment.lecturer,

@@ -83,5 +83,6 @@ export class AddAppointmentComponent implements OnInit {
     this.crudApi.AddAppointment(this.appointmentForm.value); // Submit student data using CRUD API
     this.toastr.success('successfully added!'); // Show success message when data is successfully submited
     this.ResetForm();  // Reset form when clicked on reset button
+    this.router.navigate(['dashboard']);
    };
 }
