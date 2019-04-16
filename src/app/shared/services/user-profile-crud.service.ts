@@ -17,13 +17,19 @@ export class UserProfileCrudService {
 
   // Create Profile
   CreateProfile(profile: UserProfile) {
+    var userType;
     console.log(this.userData);
+    if(profile.idNumber.length == 8 && profile.idNumber.charAt(0)== '3')
+      userType = "Staff";
+    else
+      userType = "Student";
+
     this.profilesRef.push({
       uid: this.userData.uid,
-      name: this.userData.displayName,
+      name: profile.name,
       idNumber: profile.idNumber,
       phoneNumber: profile.phoneNumber,
-      type: 'Student'
+      type: userType
     })
     console.log('User Profile Created!');
   }

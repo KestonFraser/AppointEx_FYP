@@ -17,13 +17,13 @@ export class AddUserProfileComponent implements OnInit {
   constructor(
     public router: Router,
     public authService: AuthService,
-    public editProfileCrudApi: UserProfileCrudService,  // CRUD API services
+    public ProfileCrudApi: UserProfileCrudService,  // CRUD API services
     public fb: FormBuilder,       // Form Builder service for Reactive forms
     public toastr: ToastrService  // Toastr service for alert message
   ) { }
 
   ngOnInit() {
-    this.editProfileCrudApi.GetProfileList();
+    this.ProfileCrudApi.GetProfileList();
     this.profileData();
   }
 
@@ -42,7 +42,7 @@ export class AddUserProfileComponent implements OnInit {
   }  
  
   submitProfileData() {
-    this.editProfileCrudApi.CreateProfile(this.profileForm.value); // Submit student data using CRUD API
+    this.ProfileCrudApi.CreateProfile(this.profileForm.value); // Submit student data using CRUD API
     this.toastr.success('Profile successfully created!'); // Show success message when data is successfully submited
     this.ResetForm();  // Reset form when clicked on reset button
     //this.router.navigate(['dashboard']);

@@ -36,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 // NGX Pagination
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     // MatSelectModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
-    NgxPaginationModule  // Include it in imports array
+    NgxPaginationModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })  // Include it in imports array
   ],
   providers: [],
   bootstrap: [AppComponent]
