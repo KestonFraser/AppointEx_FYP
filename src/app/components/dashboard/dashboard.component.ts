@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
-import { CrudService } from '../../shared/services/crud.service';  // CRUD API service class
+import { AppointmentCrudService } from '../../shared/services/appointment-crud.service';  // CRUD API service class
 import { Appointment } from '../../shared/appointment';   // Student interface class for Data types.
 import { ToastrService } from 'ngx-toastr';      // Alert message using NGX toastr
 
@@ -21,13 +21,13 @@ export class DashboardComponent implements OnInit {
     public authService: AuthService,
     public router: Router,
     public ngZone: NgZone,
-    public crudApi: CrudService, // Inject student CRUD services in constructor.
+    public appointmentCrudApi: AppointmentCrudService, // Inject student CRUD services in constructor.
     public toastr: ToastrService // Toastr service for alert message
   ) { }
 
   ngOnInit() {
     this.dataState(); // Initialize student's list, when component is ready
-    let s = this.crudApi.GetAppointmentsList(); 
+    let s = this.appointmentCrudApi.GetAppointmentsList(); 
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
       this.Appointment = [];
       data.forEach(item => {
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData & preLoader variables when any changes occurs in student data list in real-time.
   dataState() {     
-    this.crudApi.GetAppointmentsList().valueChanges().subscribe(data => {
+    this.appointmentCrudApi.GetAppointmentsList().valueChanges().subscribe(data => {
       this.preLoader = false;
       if(data.length <= 0){
         this.hideWhenNoAppointment = false;
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   // Method to delete student object
   deleteAppointment(appointment) {
     if (window.confirm('Are sure you want to delete this appointment ?')) { // Asking from user before Deleting appointment data.
-      this.crudApi.DeleteAppointment(appointment.$key) // Using Delete Appointment API to delete appointment.
+      this.appointmentCrudApi.DeleteAppointment(appointment.$key) // Using Delete Appointment API to delete appointment.
       this.toastr.success('successfully deleted!'); // Alert message will show up when appointment successfully deleted.
     }
   }

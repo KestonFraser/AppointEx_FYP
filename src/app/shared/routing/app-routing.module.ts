@@ -10,6 +10,8 @@ import { ForgotPasswordComponent } from '../../components/forgot-password/forgot
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
 import { AddAppointmentComponent } from '../../components/add-appointment/add-appointment.component';
 import { EditAppointmentComponent } from '../../components/edit-appointment/edit-appointment.component';
+import { AddUserProfileComponent } from 'src/app/components/add-user-profile/add-user-profile.component';
+import { EditUserProfileComponent } from 'src/app/components/edit-user-profile/edit-user-profile.component';
 
 
 // Import canActivate guard services
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent},
   { path: 'register-user', component: SignUpComponent},
   { path: 'dashboard', component: DashboardComponent},
+  { path: 'add-user-profile', component: AddUserProfileComponent},
+  { path: 'edit-user-profile', component: EditUserProfileComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'verify-email-address', component: VerifyEmailComponent},
   { path: 'create-appointment', component: AddAppointmentComponent },

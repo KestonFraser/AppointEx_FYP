@@ -1,0 +1,100 @@
+<!-- <p>
+  edit-user-profile works!
+</p> -->
+
+<!-- <p>
+  dashboard works!
+</p> -->
+
+<!-- Top navigation -->
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard">
+    AppointEx
+    <span class="dasboard-text">Dashboard</span>
+  </a>
+  <!-- <li class="nav-item">
+    <a class="nav-link" (click)="authService.SignOut()">
+      <i class="fas fa-sign-out-alt"></i>Log out
+    </a>
+  </li> -->
+</nav>
+  
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar navigation -->
+    <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/edit-user-profile" routerLinkActive="active">
+              <i class="fas fa-user-circle"></i>User Profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/create-appointment" routerLinkActive="active">
+              <i class="fas fa-plus"></i>Create Appointment
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="authService.SignOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </li>      
+        </ul>
+      </div>
+    </nav> -->
+    <!-- End of Sidebar navigation -->
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+        <div class="container-fluid" >
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Edit Profile Details</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group">
+                  <!-- goBack() methos to back to previous component -->
+                  <button class="btn btn-sm btn-outline-secondary" (click)="goBack()">Go Back</button>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="pricing-header form-block mx-auto">
+                <!-- Profile Form -->
+                <form [formGroup]="editForm" (ngSubmit)="editProfileData()" novalidate>
+                  <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                      <div>
+                        <label>Username</label>
+                        <input type="text" class="form-control" formControlName="name" required>
+                      </div>
+                      <br>
+                      <div>
+                        <label>ID Number</label>
+                        <input type="text" class="form-control" formControlName="idNumber" required>
+                      </div>
+                      <br>
+                      <div>
+                        <label>Phone Number</label>
+                        <input type="text" class="form-control" formControlName="phoneNumber" required>
+                      </div>
+                      <br>
+                      <div class="text-right">
+                        <button type="submit" class="btn btn-success">Update Profile</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>             
+      </div>
+    </main>
+  </div>
+</div>

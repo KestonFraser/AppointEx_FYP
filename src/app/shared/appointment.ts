@@ -1,5 +1,6 @@
 export interface Appointment {
-    $key: string;
+    //key: string;
+    $uid: string;
     idNumber: string;
     name: string;
     email: string

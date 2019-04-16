@@ -13,6 +13,8 @@ import { environment } from '../environments/environment';
 
 // Components
 import { AppComponent } from './app.component';
+import { AddUserProfileComponent } from './components/add-user-profile/add-user-profile.component';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -44,7 +46,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SignInComponent,
     DashboardComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    EditUserProfileComponent,
+    AddUserProfileComponent
   ],
   imports: [
     BrowserModule,

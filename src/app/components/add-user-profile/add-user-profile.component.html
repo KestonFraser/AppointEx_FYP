@@ -1,0 +1,108 @@
+<!-- <p>
+  add-user-profile works!
+</p> -->
+
+
+<!-- <p>
+  dashboard works!
+</p> -->
+
+<!-- Top navigation -->
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard">
+    AppointEx
+    <span class="dasboard-text">Dashboard</span>
+  </a>
+  <!-- <li class="nav-item">
+    <a class="nav-link" (click)="authService.SignOut()">
+      <i class="fas fa-sign-out-alt"></i>Log out
+    </a>
+  </li> -->
+</nav>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <!-- <li class="nav-item">
+            <a class="nav-link active">
+              <i class="fas fa-user"></i>User Profile
+            </a>
+          </li> -->
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/create-appointment" routerLinkActive="active">
+              <i class="fas fa-plus"></i>Create Appointment
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/add-user-profile" routerLinkActive="active">
+              <i class="fas fa-user-circle"></i>User Profile
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/edit-user-profile" routerLinkActive="active">
+              <i class="fas fa-user-circle"></i>Edit Profile
+            </a>
+          </li>
+
+          <!-- Calling SignOut() Api from AuthService -->
+          <li class="nav-item">
+            <a class="nav-link" (click)="authService.SignOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+        <div class="container-fluid">
+          <!-- <div class="row"> -->
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Create Profile</h1>
+              <!-- <p class="custom-text">A demo CRUD app for <strong>appointment record management system</strong> built with <strong>Angular7 and Firebase5</strong></p> -->
+            </div>
+
+            <!-- Profile Form -->
+            <form [formGroup]="profileForm" (ngSubmit)="submitProfileData()" novalidate>
+              <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                  <div>
+                    <label>Username</label>
+                    <input type="text" class="form-control" formControlName="name" required placeholder="Enter your name">
+                  </div>
+                  <br>
+                  <div>
+                    <label>ID Number</label>
+                    <input type="text" class="form-control" formControlName="idNumber" required placeholder="Select from available dates...">
+                  </div>
+                  <br>
+                  <div>
+                    <label>User Type</label>
+                    <input type="text" class="form-control" formControlName="type" required placeholder="Enter your user role e.g Staff or Student">
+                  </div>
+                  <br>
+                  <div>
+                    <label>Phone Number</label>
+                    <input type="text" class="form-control" formControlName="phoneNumber" required placeholder="Enter your phone number">
+                  </div>
+                  <br>
+                  <div class="text-right">
+                    <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
+                    <button type="submit" class="btn btn-success">Create Profile</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div> 
+      </div>
+    </main>
+  </div>
+</div>

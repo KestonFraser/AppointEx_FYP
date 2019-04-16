@@ -5,24 +5,26 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 @Injectable({
   providedIn: 'root'
 })
-export class CrudService{
+export class AppointmentCrudService{
 
   appointmentsRef: AngularFireList<any>;    // Reference to Appointment data list, its an Observable
   appointmentRef: AngularFireObject<any>;   // Reference to Appointment object, its an Observable too
 
-  myData = JSON.parse(localStorage.getItem('user'));
-  
+  userData = JSON.parse(localStorage.getItem('user'));
+  profileData = JSON.parse(localStorage.getItem('profile'));
+
   // Inject AngularFireDatabase Dependency in Constructor
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {}
 
   // Create Appointment
   AddAppointment(appointment: Appointment) {
-    console.log(this.myData);
+    console.log(this.profileData);
     this.appointmentsRef.push({
-      name: 'AppointEx Test', //this.myData.displayName,
-      idNumber: '816008234', //this.myData.idNumber
-      email: this.myData.email,
-      mobileNumber: '123-4567', //this.myData.phoneNumber,
+      uid: this.userData.uid,
+      name: this.profileData.name,
+      idNumber: this.profileData.idNumber,
+      email: this.userData.email,
+      mobileNumber: this.profileData.phoneNumber,
       lecturer: appointment.lecturer,
       date: appointment.date,
       time: appointment.time,
@@ -46,10 +48,11 @@ export class CrudService{
   // Update Appointment Object
   UpdateAppointment(appointment: Appointment) {
     this.appointmentRef.update({
-      name: 'AppointEx Test', //this.myData.displayName,
-      idNumber: '816008234',
-      email: this.myData.email,
-      mobileNumber: '123-4567', //this.myData.phoneNumber,
+      uid: this.profileData.uid,
+      name: this.profileData.displayName,
+      idNumber: this.profileData.idNumber,
+      email: this.profileData.email,
+      mobileNumber: this.profileData.phoneNumber,
       lecturer: appointment.lecturer,
       date: appointment.date,
       time: appointment.time,

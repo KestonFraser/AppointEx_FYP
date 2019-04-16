@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CrudService } from '../../shared/services/crud.service';    // CRUD services API
+import { AppointmentCrudService } from '../../shared/services/appointment-crud.service';    // CRUD services API
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'; // Reactive form services
 import { ToastrService } from 'ngx-toastr'; // Alert message using NGX toastr
 import { Router } from "@angular/router";
@@ -17,13 +17,13 @@ export class AddAppointmentComponent implements OnInit {
   constructor(
     public router: Router,
     public authService: AuthService,
-    public crudApi: CrudService,  // CRUD API services
+    public appointmentCrudApi: AppointmentCrudService,  // CRUD API services
     public fb: FormBuilder,       // Form Builder service for Reactive forms
     public toastr: ToastrService  // Toastr service for alert message
   ) { }
 
   ngOnInit() {
-    this.crudApi.GetAppointmentsList();  // Call GetStudentsList() before main form is being called
+    this.appointmentCrudApi.GetAppointmentsList();  // Call GetStudentsList() before main form is being called
     this.appointmenForm();              // Call student form when component is ready
   }
 
@@ -80,7 +80,7 @@ export class AddAppointmentComponent implements OnInit {
   }  
  
   submitAppointmentData() {
-    this.crudApi.AddAppointment(this.appointmentForm.value); // Submit student data using CRUD API
+    this.appointmentCrudApi.AddAppointment(this.appointmentForm.value); // Submit student data using CRUD API
     this.toastr.success('successfully added!'); // Show success message when data is successfully submited
     this.ResetForm();  // Reset form when clicked on reset button
     this.router.navigate(['dashboard']);

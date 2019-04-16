@@ -1,7 +1,8 @@
 export interface UserProfile {
-    uuid: string,
-    name: string,
-    idNumber: number,
-    phoneNumber: string,
-    type: string
+    $key: string;
+    uid: string;
+    name: string;
+    idNumber: string;
+    phoneNumber: string;
+    type: string;
 }

@@ -3,6 +3,7 @@ import { User } from '../user';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -15,23 +16,37 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private db: AngularFireDatabase
   ) { 
       /* Saving user data in localstorage when 
       logged in and setting up null when logged out */
       this.afAuth.authState.subscribe(user => {
         if (user) {
+          // store user data in local storage
           console.log('user authenticated, save data to local storage');
           this.userData = user;
-          // console.log(user);
-          // console.log(this.userData);
+          //console.log(user);
+          //console.log(this.userData.uid);
           localStorage.clear();
           localStorage.setItem('user', JSON.stringify(this.userData));
-          JSON.parse(localStorage.getItem('user'));
+          //JSON.parse(localStorage.getItem('user'));
+
+          // get associated profile and store in local storage
+          var profilesRef = this.db.database.ref("user-profile-list/");
+          profilesRef.orderByChild("uid").equalTo(this.userData.uid).on("child_added",function(profileData){
+            var id = profileData.key;
+            //console.log("profile id is",id);
+            //console.log(profileData.val());
+            console.log('profile retrieved, save id and data to local storage');
+            localStorage.setItem('profile', JSON.stringify(profileData.val()));
+            localStorage.setItem('profileID', JSON.stringify(id));
+            //JSON.parse(localStorage.getItem('profile'));
+          });
         } else {
           console.log('user logged out, data removed from to local storage');
           localStorage.setItem('user', null);
-          JSON.parse(localStorage.getItem('user'));
+          //JSON.parse(localStorage.getItem('user'));
         }
       })
   }
@@ -57,6 +72,7 @@ export class AuthService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
+        //this.router.navigate(['add-user-profile']);
       }).catch((error) => {
         window.alert(error.message)
       })
