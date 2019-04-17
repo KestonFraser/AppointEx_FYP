@@ -16,7 +16,10 @@ export class DashboardComponent implements OnInit {
   hideWhenNoAppointment: boolean = false; // Hide students data table when no student.
   noData: boolean = false;            // Showing No Student Message, when no student in database.
   preLoader: boolean = true;          // Showing Preloader to show user data is coming for you from thre server(A tiny UX Shit)
-  
+  lecturer: boolean = false;
+  student: boolean = false;
+  profileData: any
+
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -26,9 +29,18 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+
     this.dataState(); // Initialize student's list, when component is ready
     let s = this.appointmentCrudApi.GetAppointmentsList(); 
     s.snapshotChanges().subscribe(data => { // Using snapshotChanges() method to retrieve list of data along with metadata($key)
+      this.profileData = JSON.parse(localStorage.getItem('profile'));
+      if (this.profileData.type === "Lecturer")
+        this.lecturer = true;
+      else if(this.profileData.type === "Student")
+        this.student = true;
+
+      
       this.Appointment = [];
       data.forEach(item => {
         let a = item.payload.toJSON(); 

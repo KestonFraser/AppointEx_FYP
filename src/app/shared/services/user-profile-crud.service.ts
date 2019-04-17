@@ -20,7 +20,7 @@ export class UserProfileCrudService {
     var userType;
     console.log(this.userData);
     if(profile.idNumber.length == 8 && profile.idNumber.charAt(0)== '3')
-      userType = "Staff";
+      userType = "Lecturer";
     else
       userType = "Student";
 
@@ -43,15 +43,15 @@ export class UserProfileCrudService {
       phoneNumber: profile.phoneNumber, //this.myData.phoneNumber,
       type: 'Student'
     })
-
-    var profilesRef = this.db.database.ref("user-profile-list/");
-    profilesRef.orderByChild("uid").equalTo(this.userData.uid).on("child_added",function(profileData){
-      var id = profileData.key;
-      //console.log("profile id is",id);
-      //console.log(profileData.val());
-      console.log('profile retrieved, save id and data to local storage');
-      localStorage.setItem('profile', JSON.stringify(profileData.val()));
-    })
+    localStorage.setItem('profile', JSON.stringify(profile));
+    // var profilesRef = this.db.database.ref("user-profile-list/");
+    // profilesRef.orderByChild("uid").equalTo(this.userData.uid).on("child_added",function(profileData){
+    //   var id = profileData.key;
+    //   //console.log("profile id is",id);
+    //   //console.log(profileData.val());
+    //   console.log('profile retrieved, save id and data to local storage');
+    //   localStorage.setItem('profile', JSON.stringify(profileData.val()));
+    // })
   }  
 
    // Fetch Profiles List

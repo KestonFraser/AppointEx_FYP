@@ -5,6 +5,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from "@angular/router";
+import { NgIf } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -44,8 +45,10 @@ export class AuthService {
             //JSON.parse(localStorage.getItem('profile'));
           });
         } else {
-          console.log('user logged out, data removed from to local storage');
+          console.log('user logged out, user and profile data removed from to local storage');
           localStorage.setItem('user', null);
+          localStorage.setItem('profile', null);
+          localStorage.setItem('profileID', null);
           //JSON.parse(localStorage.getItem('user'));
         }
       })
@@ -56,6 +59,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
+          NgIf
           this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);

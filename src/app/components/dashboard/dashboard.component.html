@@ -3,7 +3,7 @@
 </p> -->
 
 <!-- Top navigation -->
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+<nav class="navbar navbar-expand-lg navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard">
     AppointEx
     <span class="dasboard-text">Dashboard</span>
@@ -13,7 +13,9 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar navigation -->
-    <nav class="col-md-2 d-md-block bg-light sidebar">
+    <nav class="navbar navbar-expand-lg col-md-2 d-md-block bg-light sidebar">
+      <br>
+      <br>
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -103,10 +105,10 @@
               <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
                 <thead>
                   <tr>
-                    <th scope="col">Student name</th>
-                    <th scope="col">Student Id</th>
-                    <!-- <th scope="col">Email</th>
-                    <th scope="col">Mobile number</th> -->
+                    <th *ngIf="lecturer" scope="col">Student name</th>
+                    <th *ngIf="lecturer" scope="col">Student Id</th>
+                    <th *ngIf="lecturer" scope="col">Student Email</th>
+                    <th *ngIf="lecturer" scope="col">Student number</th>
                     <th scope="col">Lecturer</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
@@ -119,18 +121,18 @@
                   <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
                   <tr *ngFor="let appointment of Appointment | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
                     <!-- <th scope="row">{{appointment.$key}}</th> -->
-                    <td>{{appointment.name}}</td>
-                    <td>{{appointment.idNumber}}</td>
-                    <!-- <td>{{appointment.email}}</td>
-                    <td>{{appointment.mobileNumber}}</td> -->
+                    <td *ngIf="lecturer">{{appointment.name}}</td>
+                    <td *ngIf="lecturer">{{appointment.idNumber}}</td>
+                    <td *ngIf="lecturer">{{appointment.email}}</td>
+                    <td *ngIf="lecturer">{{appointment.mobileNumber}}</td>
                     <td>{{appointment.lecturer}}</td>
                     <td>{{appointment.date}}</td>
                     <td>{{appointment.time}}</td>
                     <td>{{appointment.type}}</td>
                     <td class="text-center action-block">
                       <!-- routerLink="/edit-student/{{student.$key}}" is refered to { path: 'edit-student/:id', component: EditStudentComponent } in app-routing.moudles.ts -->
-                      <i class="far fa-edit" routerLink="/edit-appointment/{{appointment.$key}}"></i>
-                      <i class="far fa-trash-alt" (click)="deleteAppointment(appointment)"></i></td>
+                      <i *ngIf="student" class="far fa-edit" title="Click to edit this appointment" routerLink="/edit-appointment/{{appointment.$key}}"></i>
+                      <i class="far fa-trash-alt" title="Click to delete this appointment" (click)="deleteAppointment(appointment)"></i></td>
                   </tr>
                 </tbody>
               </table>

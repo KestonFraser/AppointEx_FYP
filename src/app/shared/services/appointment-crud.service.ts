@@ -48,10 +48,10 @@ export class AppointmentCrudService{
   // Update Appointment Object
   UpdateAppointment(appointment: Appointment) {
     this.appointmentRef.update({
-      uid: this.profileData.uid,
-      name: this.profileData.displayName,
+      uid: this.userData.email,
+      name: this.profileData.name,
       idNumber: this.profileData.idNumber,
-      email: this.profileData.email,
+      email: this.userData.email,
       mobileNumber: this.profileData.phoneNumber,
       lecturer: appointment.lecturer,
       date: appointment.date,

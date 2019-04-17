@@ -84,5 +84,9 @@ export class AddAppointmentComponent implements OnInit {
     this.toastr.success('successfully added!'); // Show success message when data is successfully submited
     this.ResetForm();  // Reset form when clicked on reset button
     this.router.navigate(['dashboard']);
-   };
+  };
+
+  goBack() {
+    this.router.navigate(['dashboard']);
+  }
 }
