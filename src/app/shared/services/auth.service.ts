@@ -68,9 +68,10 @@ export class AuthService {
             localStorage.setItem('profileID', JSON.stringify(id));
           });
           NgIf
-          this.router.navigate(['dashboard']);
+          
         });
         this.SetUserData(result.user);
+        this.router.navigate(['dashboard']);
       }).catch((error) => {
         window.alert(error.message)
       })
