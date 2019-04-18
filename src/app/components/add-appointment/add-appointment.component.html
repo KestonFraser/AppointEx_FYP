@@ -61,79 +61,46 @@
             <!-- Appointment form -->
             <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointmentData()" novalidate>
               <div class="row">
-                <div class="col-lg-5 col-md-12 col-sm-12">
-                  <!-- <div class="col-md-12 mb-3">
-                    <label>First name</label>
-                    <input type="text" formControlName="firstName" class="form-control" required>
-                    Showing errors using getter method
-                    <p *ngIf="firstName.touched && firstName.invalid" class="error"><sup>*</sup>Please enter atleast first name</p>
-                    <p *ngIf="firstName.errors?.minlength" class="error"><sup>*</sup>Name shouldn't be less than 2 words</p>
-                  </div> -->
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <label for="type">Appointment Type</label>
+                    <select formControlName="type" class="custom-select custom-select-lg mb-2" required>
+                      <option selected>Select your appointment type</option>
+                      <option *ngFor="let type of appointmentTypes" [ngValue]="type">{{type}}</option>
+                    </select>
+                  </div>
 
-                  <div>
-                    <label>Appointment Type</label>
-                    <input type="text" class="form-control" formControlName="type" required placeholder="Select your appointment type">
-                    <!-- <select class="form-control" formControlName="type" required placeholder="Select your appointment type">
-                        <option>Academic Advising</option>
-                        <option>Degree Evaluation</option>
-                        <option>Help Desk</option>
-                        <option>HOD Meeting</option>
-                        <option>Lecturer Meeting</option>
-                    </select> -->
+                  <div class="form-group">
+                    <label>Lecturer</label>
+                    <select formControlName="lecturer" class="custom-select custom-select-lg mb-2" required>
+                      <option selected>Select the lecturer</option>
+                      <option *ngFor="let lecturer of appointmentPersons" [ngValue]="lecturer">{{lecturer}}</option>
+                    </select>
                   </div>
-                  <br>
-                  <div>
-                    <label>Person</label>
-                    <input type="text" class="form-control" formControlName="lecturer" required placeholder="Select the lecturer whom this appointment will be scheduled with">
-                    <!-- <select class="form-control" formControlName="lecturer" required placeholder="Select the lecturer whom this appointment will be scheduled with">
-                        <option>Person 1</option>
-                        <option>Person 2</option>
-                        <option>Person 3</option>
-                        <option>Person 4</option>
-                        <option>Person 5</option>
-                    </select> -->
-                  </div>
-                  <br>
-                  <div>
+
+                  <div class="form-group">
                     <label>Appointment Date</label>
-                    <input type="text" class="form-control" formControlName="date" required placeholder="Select from available dates...">
-                    <!-- <select class="form-control" formControlName="date" required placeholder="Select from available dates...">
-                        <option>Date 1</option>
-                        <option>Date 2</option>
-                        <option>Date 3</option>
-                        <option>Date 4</option>
-                        <option>Date 5</option>
-                    </select> -->
-                  </div>
-                  <br>
-                  <div>
-                    <label>Appointment Time</label>
-                    <input type="text" class="form-control" formControlName="time" required placeholder="Select from available times...">
-                    <!-- <select class="form-control" formControlName="time" required placeholder="Select from available times...">
-                        <option>Time 1</option>
-                        <option>Time 2</option>
-                        <option>Time 3</option>
-                        <option>Time 4</option>
-                        <option>Time 5</option>
-                    </select> -->
+                    <select formControlName="date" class="custom-select custom-select-lg mb-2" required>
+                        <option selected>Select from available dates...</option>
+                        <option *ngFor="let date of appointmentDates" [ngValue]="date">{{date}}</option>
+                    </select>
                   </div>
 
-                  <!-- <div class="form-group">
-                    <label>Any Additonal Notes?</label>
-                    <textarea class="form-control" formControlName="additionalNotes" placeholder="Enter additional notes here..."></textarea>
-                  </div> -->
+                  <div class="form-group">
+                    <label>Appointment Time</label>
+                    <select formControlName="time" class="custom-select custom-select-lg mb-2" required>
+                        <option selected>Select from available times...</option>
+                        <option *ngFor="let time of appointmentTimes" [ngValue]="time">{{time}}</option>
+                    </select>
+                  </div>
                   <br>
                   <div class="text-right">
                     <button type="button" class="btn btn-secondary gap-right" (click)="ResetForm()">Reset</button>
                     <button type="submit" class="btn btn-success">Create Appointment</button>
-                  </div>
-
-                  <!-- [disabled]="!appointmentForm.valid" -->
-            
+                  </div>      
                 </div>
               </div>
             </form><!-- Appointment form ends-->
-          <!-- </div> -->
         </div> 
       </div>
     </main>

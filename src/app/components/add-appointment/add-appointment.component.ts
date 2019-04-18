@@ -12,7 +12,38 @@ import { AuthService } from "../../shared/services/auth.service";
 })
 export class AddAppointmentComponent implements OnInit {
 
-  public appointmentForm: FormGroup;  // Define FormGroup to appointments's form
+  appointmentForm: FormGroup;  // Define FormGroup to appointments's form
+  rushAppointmentForm: FormGroup;
+
+  appointmentTypes: string [] = [
+    "Academic Advising",
+    "Degree Evaluation",
+    "Help Desk",
+    "HOD Meeting",
+    "Lecturer Meeting"
+  ];
+
+  appointmentPersons: string [] = [
+    "Dr. Mohan",
+    "Dr. Goodridge",
+    "Mr. Defraitas",
+    "Ms. Cudjoe"
+  ];
+
+  appointmentDates: string[] = [
+    "Thursday 18th April, 2019",
+    "Tuesday 23rd April, 2019",
+    "Thursday 25th April, 2019"
+  ]
+
+  appointmentTimes: string[] = [
+    "10:00 AM",
+    "10:10 AM",
+    "10:20 AM",
+    "10:30 AM",
+    "10:40 AM",
+    "10:50 AM"
+  ]
 
   constructor(
     public router: Router,
@@ -29,16 +60,16 @@ export class AddAppointmentComponent implements OnInit {
 
     // Reactive student form
     appointmenForm() {
-      this.appointmentForm = this.fb.group({
-        //firstName: ['', [Validators.required, Validators.minLength(2)]],
-        // lastName: [''],
-        // email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-        // mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-        lecturer: [''],
-        date: [''],
-        time: [''],
-        type: ['']
-      })  
+      this.appointmentForm = new FormGroup({
+        lecturer: new FormControl(""),
+        date: new FormControl(""),
+        time: new FormControl(""),
+        type: new FormControl("")
+      });
+      this.appointmentForm.controls['type'].setValue("Select your appointment type", {onlySelf: true});
+      this.appointmentForm.controls['lecturer'].setValue("Select the lecturer", {onlySelf: true});
+      this.appointmentForm.controls['date'].setValue("Select from available dates...", {onlySelf: true});
+      this.appointmentForm.controls['time'].setValue("Select from available times...", {onlySelf: true});
     }
 
     //Accessing form control using getters
@@ -80,6 +111,7 @@ export class AddAppointmentComponent implements OnInit {
   }  
  
   submitAppointmentData() {
+    //console.log(this.appointmentForm.value)
     this.appointmentCrudApi.AddAppointment(this.appointmentForm.value); // Submit student data using CRUD API
     this.toastr.success('successfully added!'); // Show success message when data is successfully submited
     this.ResetForm();  // Reset form when clicked on reset button

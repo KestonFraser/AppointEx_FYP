@@ -76,11 +76,12 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <!-- Hey {{user.displayName}} AppointEx -->
             <h1 class="h2">Your Upcoming Appointments</h1>
-            <!-- It won't show if there is no student data -->
-            <!-- <a routerLink="/create-appointment" class="btn btn-success" *ngIf="hideWhenNoAppointment">
-              <i class="fas fa-plus custom-fa-plus"></i>
-              Add Appointment
-            </a> -->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group">
+                    <!-- goBack() methos to back to previous component -->
+                    <button *ngIf="student" class="btn btn-lg btn-success" (click)="createRushAppointment()">Create Rush Help Desk Appointment</button>
+                </div>
+              </div>
           </div>
 
           <div class="pricing-header mx-auto">

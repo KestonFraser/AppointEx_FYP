@@ -60,6 +60,14 @@ export class AuthService {
       .then((result) => {
         this.ngZone.run(() => {
           NgIf
+          var profilesRef = this.db.database.ref("user-profile-list/");
+          profilesRef.orderByChild("uid").equalTo(this.userData.uid).on("child_added",function(profileData){
+            var id = profileData.key;
+            console.log('profile retrieved, save id and data to local storage');
+            localStorage.setItem('profile', JSON.stringify(profileData.val()));
+            localStorage.setItem('profileID', JSON.stringify(id));
+          });
+          NgIf
           this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);

@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { AppointmentCrudService } from '../../shared/services/appointment-crud.service';  // CRUD API service class
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'; // Reactive form services
 import { Appointment } from '../../shared/appointment';   // Student interface class for Data types.
 import { ToastrService } from 'ngx-toastr';      // Alert message using NGX toastr
 
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
   lecturer: boolean = false;
   student: boolean = false;
   profileData: any
+  appointmentForm: FormGroup;  // Define FormGroup to appointments's form
 
   constructor(
     public authService: AuthService,
@@ -62,6 +64,23 @@ export class DashboardComponent implements OnInit {
         this.noData = false;
       }
     })
+  }
+
+  createRushAppointment(){
+    this.appointmentForm = new FormGroup({
+      lecturer: new FormControl(""),
+      date: new FormControl(""),
+      time: new FormControl(""),
+      type: new FormControl("")
+    });
+    
+    this.appointmentForm.controls['type'].setValue("Help Desk");
+    this.appointmentForm.controls['lecturer'].setValue("-");
+    this.appointmentForm.controls['date'].setValue("Thursday 18th April, 2019");
+    this.appointmentForm.controls['time'].setValue("1:30 PM");
+
+    this.appointmentCrudApi.AddAppointment(this.appointmentForm.value); // Submit student data using CRUD API
+    this.toastr.success('successfully added!'); // Show success message when data is successfully submited
   }
 
   // Method to delete student object
